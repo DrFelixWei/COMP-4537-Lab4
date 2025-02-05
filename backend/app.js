@@ -78,3 +78,19 @@ const PORT = 8080;
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+
+// Get request for search
+function getWord(word){
+  const xhttp = new XMLHttpRequest();
+  const url = `http://localhost:8080/api/definitions?word=${word}`;
+  xhttp.open('GET', url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState === 4 && this.status === 200) {
+      const response = JSON.parse(this.responseText);
+      console.log(response);
+    }
+  };
+
+}
