@@ -8,13 +8,13 @@
 </head>
 <body>
     <div class="container">
-        <h2>Search for a Definition</h2>
-        <label for="search">Enter Word:</label>
+        <h2 id="title"></h2>
+        <label for="search" id="enterWord">Enter Word</label>
         <input type="text" id="search" name="search">
-        <button onclick="searchDefinition()">Search</button>
+        <button onclick="searchDefinition()" id="searchButton">Search</button>
         <p class="response" id="response"></p>
     </div>
     
-    <script src="./scripts/search.js"></script>
+    <script src="./scripts/search.js" type="module"></script>
 </body>
 </html>

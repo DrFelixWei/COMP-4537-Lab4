@@ -8,18 +8,18 @@
 </head>
 <body>
     <div class="container">
-        <h2>Store a Definition</h2>
+        <h2 id="title"></h2>
         <div id="definitionForm">
-            <label for="word">Word:</label>
+            <label for="word" id="wordText"></label>
             <input type="text" id="word" name="word" required>
-            <label for="definition">Definition:</label>
+            <label for="definition" id="definitionText"></label>
             <textarea id="definition" name="definition" rows="4" required></textarea>
             
-            <button onclick="storeWord()">Submit</button>
+            <button onclick="storeWord()" id="submitButton"></button>
         </div>
         <p class="response" id="response"></p>
     </div>
 
-    <script src="./scripts/store.js" ></script>
+    <script src="./scripts/store.js" type="module" ></script>
 </body>
 </html>
