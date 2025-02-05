@@ -10,6 +10,12 @@ const server = http.createServer((req, res) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204); // No content for OPTIONS
+    res.end();
+    return;
+  }
+
   requestCount++;
   const parsedUrl = url.parse(req.url, true);
   const query = parsedUrl.query;
