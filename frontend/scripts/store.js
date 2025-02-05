@@ -8,9 +8,12 @@ function storeWord(){
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify({ word, definition }));
     xhttp.onreadystatechange = function() {
-      if (this.readyState === 4) {
+      if (this.readyState === 4 && this.status === 200 || this.status === 201) {
         const response = JSON.parse(this.responseText);
         console.log(response);
-      }
+      }else if(this.status === 400){
+        const response = JSON.parse(this.responseText);
+        document.getElementById('response').innerHTML = `<strong>Error:</strong> ${response.message}`;
+        }
     };
   }
