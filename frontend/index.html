@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMP4537 Lab 4</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+
+    nav {
+      background: #333;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 18px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    #content {
+      margin-top: 20px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#store" onclick="loadContent('store.html')">Store</a>
+    <a href="#search" onclick="loadContent('search.html')">Search</a>
+  </nav>
+
+  <div id="content"></div>
+
+  <script>
+    function loadContent(page) {
+      fetch(page)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Page not found');
+          }
+          return response.text();
+        })
+        .then(html => {
+          document.getElementById('content').innerHTML = html;
+        })
+        .catch(error => {
+          document.getElementById('content').innerHTML = `<p>Error loading page: ${error.message}</p>`;
+        });
+    }
+
+    // Load the default page (store.html)
+    window.addEventListener('load', () => loadContent('store.html'));
+  </script>
+</body>
+</html>
