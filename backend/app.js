@@ -1,5 +1,6 @@
 const http = require('http');
 const url = require('url');
+const messages = require('./locals/en.json');
 
 const dictionary = []; // Dictionary array to store word: definition pairs
 let requestCount = 0; // Counter for the total number of requests
@@ -20,11 +21,11 @@ const server = http.createServer((req, res) => {
         res.end(JSON.stringify({ definition: entry.definition }));
       } else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ message: `Definition for '${query.word}' not found.` }));
+        res.end(JSON.stringify({ message: messages.definitionNotFound.replace('{word}', query.word) }));
       }
     } else {
       res.writeHead(400, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ message: 'Please provide a word query parameter.' }));
+      res.end(JSON.stringify({ message: messages.provideWordQuery }));
     }
   }
   // Handle POST requests
@@ -41,7 +42,7 @@ const server = http.createServer((req, res) => {
 
         if (!word || !definition) {
           res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ message: 'Please provide both a word and a definition.' }));
+          res.end(JSON.stringify({ message: messages.provideWordAndDefinition }));
           return;
         }
 
@@ -50,26 +51,26 @@ const server = http.createServer((req, res) => {
 
         if (existingEntry) {
           res.writeHead(409, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ message: `Warning! '${word}' already exists.` }));
+          res.end(JSON.stringify({ message: messages.entryAlreadyExists.replace('{word}', word) }));
         } else {
           dictionary.push({ word: lowerWord, definition });
           res.writeHead(201, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({
-            message: `New entry recorded: "${word} : ${definition}"`,
+            message: messages.newEntryRecorded.replace('{word}', word).replace('{definition}', definition),
             totalRequests: requestCount,
             totalEntries: dictionary.length
           }));
         }
       } catch (error) {
         res.writeHead(400, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ message: 'Invalid JSON body.' }));
+        res.end(JSON.stringify({ message: messages.invalidJsonBody }));
       }
     });
   }
   // Handle unknown routes
   else {
     res.writeHead(404, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ message: 'Route not found.' }));
+    res.end(JSON.stringify({ message: messages.routeNotFound }));
   }
 });
 
