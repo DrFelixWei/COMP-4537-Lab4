@@ -5,5 +5,6 @@
   "entryAlreadyExists": "Warning! '{word}' already exists.",
   "newEntryRecorded": "New entry recorded: \"{word} : {definition}\"",
   "invalidJsonBody": "Invalid JSON body.",
-  "routeNotFound": "Route not found."
+  "routeNotFound": "Route not found.",
+  "invalidInput": "Only alphabetical characters and punctuation allowed. No numbers."
 } 

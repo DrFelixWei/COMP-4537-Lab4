@@ -1,6 +1,7 @@
 const http = require('http');
 const url = require('url');
 const messages = require('./locals/en.json');
+const { validate } = require('./modules/utils'); 
 
 const dictionary = []; 
 let requestCount = 0;
@@ -11,7 +12,7 @@ const server = http.createServer((req, res) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
-    res.writeHead(204); // No content for OPTIONS
+    res.writeHead(204);
     res.end();
     return;
   }
@@ -53,6 +54,12 @@ const server = http.createServer((req, res) => {
         if (!word || !definition) {
           res.writeHead(400, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({ message: messages.provideWordAndDefinition }));
+          return;
+        }
+
+        if (!validate(word) || !validate(definition)) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ message: messages.invalidInput }));
           return;
         }
 
