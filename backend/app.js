@@ -81,31 +81,4 @@ server.listen(PORT, () => {
 });
 
 
-// Get request for search
-function getWord(word){
-  const xhttp = new XMLHttpRequest();
-  const url = `http://localhost:8080/api/definitions?word=${word}`;
-  xhttp.open('GET', url, true);
-  xhttp.send();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState === 4 && this.status === 200) {
-      const response = JSON.parse(this.responseText);
-      console.log(response);
-    }
-  };
 
-}
-
-function storeWord(word, definition){
-  const xhttp = new XMLHttpRequest();
-  const url = `http://localhost:8080/api/definitions`;
-  xhttp.open('POST', url, true);
-  xhttp.setRequestHeader('Content-Type', 'application/json');
-  xhttp.send(JSON.stringify({ word, definition }));
-  xhttp.onreadystatechange = function() {
-    if (this.readyState === 4) {
-      const response = JSON.parse(this.responseText);
-      console.log(response);
-    }
-  };
-}

@@ -9,16 +9,17 @@
 <body>
     <div class="container">
         <h2>Store a Definition</h2>
-        <form id="definitionForm">
+        <div id="definitionForm">
             <label for="word">Word:</label>
             <input type="text" id="word" name="word" required>
-            
             <label for="definition">Definition:</label>
             <textarea id="definition" name="definition" rows="4" required></textarea>
             
-            <button type="submit">Submit</button>
-        </form>
+            <button onclick="storeWord()">Submit</button>
+        </div>
         <p class="feedback" id="feedback"></p>
     </div>
+
+    <script src="./scripts/store.js" ></script>
 </body>
 </html>
