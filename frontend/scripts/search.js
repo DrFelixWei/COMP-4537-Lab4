@@ -9,6 +9,9 @@ function searchDefinition(){
       if (this.readyState === 4 && this.status === 200) {
         const response = JSON.parse(this.responseText);
         console.log(response);
+      }else if(this.readyState === 4 && this.status === 404){
+        const response = JSON.parse(this.responseText);
+        document.getElementById('response').innerHTML = `<strong>Error:</strong> ${response.message}`;
       }
     };
   
