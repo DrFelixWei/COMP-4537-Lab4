@@ -8,6 +8,7 @@ function searchDefinition(){
     xhttp.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
         const response = JSON.parse(this.responseText);
+        document.getElementById('response').innerHTML = `<strong>Definition:</strong> ${response.definition}`;
         console.log(response);
       }else if(this.status === 404){
         console.log(this.status, typeof this.status);
