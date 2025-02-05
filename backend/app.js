@@ -2,10 +2,14 @@ const http = require('http');
 const url = require('url');
 const messages = require('./locals/en.json');
 
-const dictionary = []; // Dictionary array to store word: definition pairs
-let requestCount = 0; // Counter for the total number of requests
+const dictionary = []; 
+let requestCount = 0;
 
 const server = http.createServer((req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   requestCount++;
   const parsedUrl = url.parse(req.url, true);
   const query = parsedUrl.query;
@@ -15,7 +19,7 @@ const server = http.createServer((req, res) => {
     if (query.word) {
       const word = query.word.toLowerCase();
       const entry = dictionary.find(item => item.word === word);
-      
+
       if (entry) {
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ definition: entry.definition }));
@@ -31,7 +35,7 @@ const server = http.createServer((req, res) => {
   // Handle POST requests
   else if (req.method === 'POST' && parsedUrl.pathname === '/api/definitions') {
     let body = '';
-    
+
     req.on('data', chunk => {
       body += chunk;
     });
@@ -79,5 +83,3 @@ const PORT = 8080;
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-
