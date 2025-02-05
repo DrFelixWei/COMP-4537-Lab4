@@ -1,0 +1,9 @@
+{
+  "definitionNotFound": "Definition for '{word}' not found.",
+  "provideWordQuery": "Please provide a word query parameter.",
+  "provideWordAndDefinition": "Please provide both a word and a definition.",
+  "entryAlreadyExists": "Warning! '{word}' already exists.",
+  "newEntryRecorded": "New entry recorded: \"{word} : {definition}\"",
+  "invalidJsonBody": "Invalid JSON body.",
+  "routeNotFound": "Route not found."
+} 
