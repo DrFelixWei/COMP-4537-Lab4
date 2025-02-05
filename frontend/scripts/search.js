@@ -9,10 +9,14 @@ function searchDefinition(){
       if (this.readyState === 4 && this.status === 200) {
         const response = JSON.parse(this.responseText);
         console.log(response);
-      }else if(this.readyState === 4 && this.status === 404){
+      }else if(this.status === 404){
+        console.log(this.status, typeof this.status);
         const response = JSON.parse(this.responseText);
         document.getElementById('response').innerHTML = `<strong>Error:</strong> ${response.message}`;
-      }
+      }else if(this.status === 400){
+        const response = JSON.parse(this.responseText);
+        document.getElementById('response').innerHTML = `<strong>Error:</strong> ${response.message}`;
+        }
     };
   
   }
