@@ -10,14 +10,10 @@ function searchDefinition(){
         const response = JSON.parse(this.responseText);
         document.getElementById('response').innerHTML = `<strong>Definition:</strong> ${response.definition}`;
         console.log(response);
-      }else if(this.status === 404){
-        console.log(this.status, typeof this.status);
+      }else {
         const response = JSON.parse(this.responseText);
         document.getElementById('response').innerHTML = `<strong>Error:</strong> ${response.message}`;
-      }else if(this.status === 400){
-        const response = JSON.parse(this.responseText);
-        document.getElementById('response').innerHTML = `<strong>Error:</strong> ${response.message}`;
-        }
+      }
     };
   
   }
